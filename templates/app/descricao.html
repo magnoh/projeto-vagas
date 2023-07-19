@@ -1,0 +1,28 @@
+{% extends 'app/base_page.html' %}
+{% load static %}
+{% block content %}
+
+
+{% include 'partials/__nav.html' %}{% include 'partials/_menu_header.html' %}
+<section class="conteudo">
+    <div class="d-flex flex-row flex-wrap gap-4 mt-5 mb-5" style="justify-content: center;">
+
+        <div class="card">
+            <div class="card-header text-center">
+                {{ vaga.cargo_vaga}}
+            </div>
+            <div class="card-body card_descricao">
+                <h5 class="card-title text-center">{{vaga.faixa_salarial}}</h5>
+                <p class="card-text card_descricao">{{ vaga.descricao_vaga }}</p>
+                <p class="card-text">{{ acesso.escolaridade_vaga }}</p>
+                <a href="#" style="background-color: #00ff88; color: black; border: #00ff88;"
+                    class="btn btn-primary">candidatar-se</a>
+            </div>
+            <div class="card-footer text-muted text-center">
+                {{vaga.data_publicada}}
+            </div>
+        </div>
+    </div>
+
+</section>
+{% endblock %}

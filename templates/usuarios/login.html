@@ -1,0 +1,43 @@
+{% extends 'app/base_page.html' %}
+
+{% load static %}
+{% block content %}
+
+{% include 'partials/__nav.html' %}{% include 'partials/_menu_header.html' %}
+
+<div class="main-login">
+    <div class="left-login">
+        {% for message in messages %}
+        <div class="alert alert-primary">
+            <p id="messages">{{ message }}</p>
+        </div>
+        {% endfor %}
+        <h1>Faça Login <br> E entre para o nosso time</h1>
+        <img src="{% static '/assets/svg/resume-animate.svg' %}" class="left-login-image" alt="resume">
+    </div>
+    <section class="right-login d-flex flex-column">
+        <div class="card-login">
+            <h1>Login</h1>
+            <form action="{% url 'login' %}" method="POST" class="textfield">
+                {% csrf_token %}
+                <div class="input-group textfield mb-3">
+                    {% for field in form.visible_fields %}
+                    <div class="textfield text-field-color">
+                        <label for="{{form.id_for_label}}"> {{field.label}} </label>
+                        {{ field }}
+                    </div>
+                    {% endfor %}
+                </div>
+                <button class="btn-login" type="submit">Login</button>
+
+                <a class="input-group textfield mb-3" href="{% url 'cadastro' %}">
+                    <button type="button" class="btn-cadastrar">Cadastre-se</button>
+                </a>
+
+            </form>
+
+        </div>
+    </section>
+</div>
+
+{% endblock %}

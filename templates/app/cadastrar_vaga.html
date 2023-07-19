@@ -1,0 +1,49 @@
+{% extends 'app/base_page.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'partials/__nav.html' %}{% include 'partials/_menu_header.html' %}
+
+<section>
+    <div class="section_search">
+        <div class="search_h1">
+            <h4>Venha conhecer nossas vagas disponiveis!</h4>
+        </div>
+        <div class="div_center">
+            <div class="div_search">
+                <form action="{% url 'buscar' %}" class="form_search">
+                    <input type="text" class="busca__input" name="buscar" placeholder="O que você procura?">
+                    <button class="btn_search" type="submit">Icone</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% for message in messages %}
+<div class="alert alert-primary">
+    <p id="messages">{{ message }}</p>
+</div>
+{% endfor %}
+
+<section class="container mt-5">
+    <h1 class="mb-5">Cadastrar vaga</h1>
+    <form action="{% url 'cadastro_vaga' %}" class="w-50" method="POST">
+        {% csrf_token %}
+        {% for field in data.form %}
+        <div class="input-group col-md-6">
+            <div class="textfield">
+                <label for="{{form.id_for_label}}" class="form-label"> {{field.label}} </label>
+                {{field}}
+            </div>
+        </div>
+        {% endfor %}
+
+        <button type="submit" class="btn-login">
+            Cadastrar
+        </button>
+        </div>
+    </form>
+</section>
+
+{% endblock %}

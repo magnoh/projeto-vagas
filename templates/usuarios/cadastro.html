@@ -1,0 +1,32 @@
+{% extends 'app/base_page.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'partials/__nav.html' %}{% include 'partials/_menu_header.html' %}
+
+<div class="main-login">
+    <div class="left-login">
+
+        <h1>Faça Login <br> E entre para o nosso time</h1>
+        <img src="{% static '/assets/svg/resume-animate.svg' %}" class="left-login-image" alt="resume">
+    </div>
+    <section class="right-login">
+        <form action="{% url 'cadastro' %}" method="POST" class="card-login">
+            {% csrf_token %}
+            <h1>Cadastrar</h1>
+            <div class="textfield">
+                {% for field in form.visible_fields %}
+                <div class="textfield text-field-color">
+                    <label for="{{form.id_for_label}}"> {{field.label}} </label>
+                    {{ field }}
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="input-group textfield mb-3">
+                <button type="submit" class="btn-cadastrar-tela">CADASTRAR</button>
+            </div>
+    </section>
+</div>
+
+{% endblock %}

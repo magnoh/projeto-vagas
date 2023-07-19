@@ -1,0 +1,49 @@
+{% extends 'app/base_page.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'partials/__nav.html' %}{% include 'partials/_menu_header.html' %}
+
+<section>
+    <div class="section_search">
+        <div class="search_h1">
+            <h4>Venha conhecer nossas vagas disponiveis!</h4>
+        </div>
+        <div class="div_center">
+            <div class="div_search">
+                <form action="{% url 'buscar' %}" class="form_search">
+                    <input type="text" class="busca__input" name="buscar" placeholder="O que você procura?">
+                    <button class="btn_search" type="submit">Icone</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% for message in messages %}
+<div class="alert alert-primary">
+    <p id="messages">{{ message }}</p>
+</div>
+{% endfor %}
+<section class="w-100 d-flex">
+    <div class="d-flex flex-row flex-wrap gap-4 mt-5 mb-5" style="justify-content: center;">
+        {% if cards %}
+        {% for acesso in cards %}
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{ acesso.cargo_vaga}}</h5>
+                <p class="card-text">{{ acesso.escolaridade_vaga }}</p>
+                <p class="card-text">{{ acesso.faixa_salarial }}</p>
+                <a href="{% url 'descricao' acesso.id %}" class="btn btn-primary "
+                    style="background-color: #00ff88; color: black; border: #00ff88;">
+                    Informações
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        {% endif %}
+    </div>
+
+</section>
+
+{% endblock %}
