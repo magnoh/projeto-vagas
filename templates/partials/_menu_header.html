@@ -2,6 +2,12 @@
 
 
 <header class="header_main">
-    <a href="{% url 'index' %}"><img class="header_img" src="{% static '/assets/img/vagdev3.png' %}" alt=""></a>
+    <a href="{% url 'index' %}"><img class="header_img" src="{% static '/assets/img/vagdev3.png' %}"></a>
+    <nav class="header_nav">
+        <div class="nav_div ">   
+            <a href="{% url 'index' %}"><img  src="{% static '/assets/img/casa_icon.png' %}"></img></a>
+            <a href="{% url 'logout' %}"><img  src="{% static '/assets/img/sair_icon.png' %}"></img></a>
+        </div>
+    </nav>
     
 </header>

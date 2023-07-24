@@ -1,9 +1,19 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpRequest
 from app.models import Vaga
 from app.forms import *
 from django.contrib import messages
 
-import json
+
+def is_authenticated(func):
+
+    def verify(request):
+        if not request.user.is_authenticated:
+            messages.error(request,"Usuario não logado")
+            return redirect('login')
+        return func(request)
+     
+    return verify
 
 def index(request):
     acesso = Vaga.objects.order_by('data_publicada')
@@ -13,12 +23,8 @@ def descricao(request, descricao_id):
     vaga = get_object_or_404(Vaga, pk=descricao_id)
     return render(request, 'app/descricao.html', {'vaga': vaga})
 
-
 def buscar(request):
-    if not request.user.is_authenticated:
-        messages.error(request,"Usuario não logado")
-        return redirect('login')
-    acessos = Vaga.objects.order_by('data_publicada').filter(publicada=True)
+    acessos = Vaga.objects.order_by('data_publicada')
     if "buscar" in request.GET:
           nome_a_buscar = request.GET['buscar']
           if nome_a_buscar:
@@ -26,17 +32,17 @@ def buscar(request):
 
     return render(request, 'app/buscar.html', {"cards": acessos})
 
+@is_authenticated
+def cadastro_vagas(request):  
+    form = CadastroVaga()
+    data = Vaga.objects.all()
 
-def cadastro_vagas(request):
-     form = CadastroVaga()
-     data = Vaga.objects.all()
-
-     context = {
+    context = {
           'form': form,
           'vagas': data,
      }
 
-     if request.method == 'POST':
+    if request.method == 'POST':
           form = CadastroVaga(request.POST)
           
           if form.is_valid():
@@ -54,37 +60,17 @@ def cadastro_vagas(request):
 
                 vaga.save()
 
-     return render(request, 'app/cadastrar_vaga.html', context={ "data": context})
+    return render(request, 'app/cadastrar_vaga.html', context={ "data": context})
 
 
-# def cadastro_vagas(request):
-#     if not request.user.is_authenticated:
-#         messages.error(request,"Usuario não logado")
-#         return redirect('login')
-    
-#     form = CadastroVaga()
-#     data = Vaga.objects.all()
-   
+def candidato_vaga(request):
+     return render (request, 'app/candidato_vaga.html')
 
-#     if request.method == 'POST':
-#         form = CadastroVaga(request.POST)
-#         if form.is_valid():
-#             cargo_vaga = form.cleaned_data['cargo_vaga']
-#             descricao_vaga = form.cleaned_data['descricao_vaga']
-#             faixa_salarial = form.cleaned_data['faixa_salarial']
-#             escolaridade_vaga = form.cleaned_data['escolaridade_vaga']
 
-#             vaga = Vaga.objects(
-#                 cargo_vaga=cargo_vaga,
-#                 descricao_vaga=descricao_vaga, 
-#                 faixa_salarial=faixa_salarial,
-#                 escolaridade_vaga=escolaridade_vaga,
-#             )
-#             vaga.save()
+@is_authenticated
+def editar_vaga(request):
+     pass
 
-#     context = {
-#         'form': form,
-#         'vagas': data,
-#     }
-
-#     return render(request, 'app/cadastrar_vaga.html', context)
+@is_authenticated
+def deletar_vaga(request):
+     pass

@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-{% include 'partials/__nav.html' %}{% include 'partials/_menu_header.html' %}
+{% include 'partials/_menu_header.html' %}
 
 <section>
     <div class="section_search">
@@ -24,7 +24,7 @@
     <p id="messages">{{ message }}</p>
 </div>
 {% endfor %}
-<section class="w-100 d-flex">
+<section class="w-100 d-flex section_cadastro_vaga">
     <div class="d-flex flex-row flex-wrap gap-4 mt-5 mb-5" style="justify-content: center;">
         {% if cards %}
         {% for acesso in cards %}

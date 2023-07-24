@@ -2,19 +2,23 @@
 {% load static %}
 {% block content %}
 
-{% include 'partials/__nav.html' %}{% include 'partials/_menu_header.html' %}
 
+{% include 'partials/_menu_header.html' %}
 <section>
-    <div class="section_search">
+    <div class="section_search ">
         <div class="search_h1">
             <h4>Venha conhecer nossas vagas disponiveis!</h4>
         </div>
         <div class="div_center">
+            <a href="{% url 'cadastro_vaga' %}" target="_blank" rel="noopener noreferrer">
+                <button class="btn_vagas bi bi-search" type="submit">Cadastrar vagas</button>
+            </a>
             <div class="div_search">
                 <form action="{% url 'buscar' %}" class="form_search">
                     <input type="text" class="busca__input" name="buscar" placeholder="O que você procura?">
                     <button class="btn_search bi bi-search" type="submit"><img
-                            src="{% static '/assets/img/search.png' %}" alt=""></button>
+                            src="{% static '/assets/img/search.png' %}" alt="">
+                    </button>
                 </form>
             </div>
         </div>
@@ -25,12 +29,12 @@
     <p id="messages">{{ message }}</p>
 </div>
 {% endfor %}
-<section class="w-100 d-flex">
-    <div class="d-flex flex-row flex-wrap gap-4 mt-5 mb-5" style="justify-content: center;">
+<section class="w-100 d-flex section_vaga">
+    <div class="d-flex flex-row flex-wrap gap-4 mt-5 mb-5 w-100 p-3 " style="justify-content: center;">
         {% if cards %}
         {% for acesso in cards %}
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
+        <div class="card div_card" style="width: 14rem;">
+            <div class="card-body div_card ">
                 <h5 class="card-title">{{ acesso.cargo_vaga}}</h5>
                 <p class="card-text">{{ acesso.escolaridade_vaga }}</p>
                 <p class="card-text">{{ acesso.faixa_salarial }}</p>
