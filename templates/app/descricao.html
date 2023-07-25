@@ -19,6 +19,8 @@
                     class="btn btn-primary">candidatar-se</a>
                 <a href="{% url 'editar_vaga' vaga.id %}" style="background-color: #00ff88; color: black; border: #00ff88;"
                     class="btn btn-primary">editar vaga</a>
+                <a href="{% url 'deletar_vaga' vaga.id %}" 
+                    class="btn btn-danger">excluir vaga</a>    
             </div>
             <div class="card-footer text-muted text-center">
                 {{vaga.data_publicada}}

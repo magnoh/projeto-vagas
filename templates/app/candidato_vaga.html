@@ -12,7 +12,7 @@
 {% endfor %}
 
 <section class="container mt-5" style="color: white;">
-    <h1 class="mb-5">Cadastrar vaga</h1>
+    <h1 class="mb-5">Candidatar-se</h1>
     <form action="{% url 'cadastro_vaga' %}" class="w-50" method="POST">
         {% csrf_token %}
         {% for field in data.form %}

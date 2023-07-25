@@ -30,7 +30,7 @@ def buscar(request):
           if nome_a_buscar:
                acessos = acessos.filter(cargo_vaga__icontains=nome_a_buscar)
 
-    return render(request, 'app/buscar.html', {"cards": acessos})
+    return render(request, 'app/index.html', {"cards": acessos})
 
 @is_authenticated
 def cadastro_vagas(request):  
@@ -82,5 +82,10 @@ def editar_vaga(request, vaga_id):
     return render(request, 'app/editar_vaga.html', {'form':form, 'vaga_id':vaga_id})
 
 @is_authenticated
-def deletar_vaga(request):
-     pass
+def deletar_vaga(request, vaga_id):
+     vagas = Vaga.objects.get(id=vaga_id)
+     vagas.delete()
+     messages.success(request, 'Vaga excluida com sucesso!')
+     return redirect('index')
+     
+     

@@ -29,7 +29,7 @@
     <p id="messages">{{ message }}</p>
 </div>
 {% endfor %}
-<section class="w-100 d-flex section_vaga">
+<section class="w-100 d-flex section_cadastro_vaga">
     <div class="d-flex flex-row flex-wrap gap-4 mt-5 mb-5 w-100 p-3 " style="justify-content: center;">
         {% if cards %}
         {% for acesso in cards %}
@@ -38,8 +38,8 @@
                 <h5 class="card-title">{{ acesso.cargo_vaga}}</h5>
                 <p class="card-text">{{ acesso.escolaridade_vaga }}</p>
                 <p class="card-text">{{ acesso.faixa_salarial }}</p>
-                <a href="{% url 'descricao' acesso.id %}" class="btn btn-primary "
-                    style="background-color: #00ff88; color: black; border: #00ff88;">
+                <a href="{% url 'descricao' acesso.id %}" class="btn_card "
+                    style="color: black;">
                     Informações
                 </a>
             </div>
