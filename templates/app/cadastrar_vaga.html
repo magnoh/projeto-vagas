@@ -5,21 +5,6 @@
 {% include 'partials/_menu_header.html' %}
 {% include 'partials/__nav.html' %}
 
-<section>
-    <div class="section_search p-1">
-        <div class="search_h1">
-            <h4>Venha conhecer nossas vagas disponiveis!</h4>
-        </div>
-        <div class="div_center">
-            <div class="div_search">
-                <form action="{% url 'buscar' %}" class="form_search">
-                    <input type="text" class="busca__input" name="buscar" placeholder="O que você procura?">
-                    <button class="btn_search" type="submit">Icone</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
 
 {% for message in messages %}
 <div class="alert alert-primary">

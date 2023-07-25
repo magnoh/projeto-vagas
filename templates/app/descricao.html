@@ -14,9 +14,11 @@
             <div class="card-body card_descricao">
                 <h5 class="card-title text-center">{{vaga.faixa_salarial}}</h5>
                 <p class="card-text card_descricao">{{ vaga.descricao_vaga }}</p>
-                <p class="card-text">{{ acesso.escolaridade_vaga }}</p>
+                <p class="card-text">{{ vaga.escolaridade_vaga }}</p>
                 <a href="{% url 'candidato_vaga' %}" style="background-color: #00ff88; color: black; border: #00ff88;"
                     class="btn btn-primary">candidatar-se</a>
+                <a href="{% url 'editar_vaga' vaga.id %}" style="background-color: #00ff88; color: black; border: #00ff88;"
+                    class="btn btn-primary">editar vaga</a>
             </div>
             <div class="card-footer text-muted text-center">
                 {{vaga.data_publicada}}

@@ -23,7 +23,7 @@ class Vaga(models.Model):
     descricao_vaga = models.TextField(null=False, blank=False, default='')
     faixa_salarial = models.CharField(max_length=100)
     escolaridade_vaga = models.TextField(max_length=100)
-    publicada = models.BooleanField(default=False)
+    publicada = models.BooleanField(default=True)
     data_publicada = models.DateField(auto_now_add=True)
     usuario = models.ForeignKey(
         to=User,

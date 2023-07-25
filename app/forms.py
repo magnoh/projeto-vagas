@@ -52,9 +52,30 @@ class CadastroVaga(forms.Form):
 
     escolaridade_vaga = forms.ChoiceField(choices=escolaridade)
 
-# class CadastroVaga(forms.ModelForm):
-#     class Meta:
-#         model = Vaga()
-#         fields = "__all__"
 
+class VagasForms(forms.ModelForm):
     
+    
+    class Meta():
+        model = Vaga
+        fields = ['cargo_vaga', 'descricao_vaga','escolaridade_vaga', 'faixa_salarial','usuario',]
+        exclude = ['publicada',]
+        labels = {
+            'descricao_vaga': 'Descrição',
+            'data_publicada': 'Data de registro',
+            'usuario':'Usuário',
+        }
+        widgets = {
+            'cargo_vaga': forms.TextInput(attrs={'class':'form-control'}),
+            'descricao_vaga': forms.Textarea(attrs={'class':'form-control'}),
+            'data_publicada': forms.DateInput(
+                format= '%d/%m/%Y',
+                attrs={
+                    'type':'date',
+                    'class':'form-control',
+                    }
+                ),
+            'usuario': forms.Select(attrs={'class':'form-control'}),
+        }
+    faixa_salarial = forms.ChoiceField(choices=salario)
+    escolaridade_vaga = forms.ChoiceField(choices=escolaridade)

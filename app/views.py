@@ -19,8 +19,8 @@ def index(request):
     acesso = Vaga.objects.order_by('data_publicada')
     return render(request, 'app/index.html', {'cards': acesso})
 
-def descricao(request, descricao_id):
-    vaga = get_object_or_404(Vaga, pk=descricao_id)
+def descricao(request, vaga_id):
+    vaga = get_object_or_404(Vaga, pk=vaga_id)
     return render(request, 'app/descricao.html', {'vaga': vaga})
 
 def buscar(request):
@@ -62,14 +62,24 @@ def cadastro_vagas(request):
 
     return render(request, 'app/cadastrar_vaga.html', context={ "data": context})
 
-
+@is_authenticated
 def candidato_vaga(request):
      return render (request, 'app/candidato_vaga.html')
 
 
-@is_authenticated
-def editar_vaga(request):
-     pass
+
+def editar_vaga(request, vaga_id):
+    vagas = Vaga.objects.get(id=vaga_id)
+    form = VagasForms(instance=vagas)
+
+    if request.method == 'POST':
+         form = VagasForms(request.POST, instance=vagas)
+         if form.is_valid():
+              form.save()
+              messages.success(request, 'Vaga editada com sucesso')
+              return redirect('index')
+
+    return render(request, 'app/editar_vaga.html', {'form':form, 'vaga_id':vaga_id})
 
 @is_authenticated
 def deletar_vaga(request):

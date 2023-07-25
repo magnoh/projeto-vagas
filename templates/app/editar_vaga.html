@@ -3,7 +3,7 @@
 {% block content %}
 
 {% include 'partials/_menu_header.html' %}
-
+{% include 'partials/__nav.html' %}
 
 {% for message in messages %}
 <div class="alert alert-primary">
@@ -12,10 +12,10 @@
 {% endfor %}
 
 <section class="container mt-5" style="color: white;">
-    <h1 class="mb-5">Cadastrar vaga</h1>
-    <form action="{% url 'cadastro_vaga' %}" class="w-50" method="POST">
+    <h1 class="mb-5">Editar vaga</h1>
+    <form action="{% url 'editar_vaga' vaga_id %}" class="w-50" method="POST">
         {% csrf_token %}
-        {% for field in data.form %}
+        {% for field in form %}
         <div class="input-group col-md-6">
             <div class="textfield">
                 <label for="{{form.id_for_label}}" class="form-label"> {{field.label}} </label>
@@ -25,7 +25,7 @@
         {% endfor %}
 
         <button type="submit" class="btn-login">
-            Cadastrar
+            Salvar
         </button>
         </div>
     </form>
