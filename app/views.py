@@ -3,17 +3,18 @@ from django.http import HttpRequest
 from app.models import Vaga
 from app.forms import *
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
+# def is_authenticated(func):
 
-def is_authenticated(func):
-
-    def verify(request):
-        if not request.user.is_authenticated:
-            messages.error(request,"Usuario não logado")
-            return redirect('login')
-        return func(request)
+#     def verify(request):
+#         if not request.user.is_authenticated:
+#             messages.error(request,"Usuario não logado")
+#             return redirect('login')
+#         return func(request)
      
-    return verify
+#     return verify
+
 
 def index(request):
     acesso = Vaga.objects.order_by('data_publicada')
@@ -32,7 +33,7 @@ def buscar(request):
 
     return render(request, 'app/index.html', {"cards": acessos})
 
-@is_authenticated
+@login_required(login_url='login')
 def cadastro_vagas(request):  
     form = CadastroVaga()
     data = Vaga.objects.all()
@@ -62,12 +63,12 @@ def cadastro_vagas(request):
 
     return render(request, 'app/cadastrar_vaga.html', context={ "data": context})
 
-@is_authenticated
+@login_required(login_url='login')
 def candidato_vaga(request):
      return render (request, 'app/candidato_vaga.html')
 
 
-
+@login_required(login_url='login')
 def editar_vaga(request, vaga_id):
     vagas = Vaga.objects.get(id=vaga_id)
     form = VagasForms(instance=vagas)
@@ -81,7 +82,7 @@ def editar_vaga(request, vaga_id):
 
     return render(request, 'app/editar_vaga.html', {'form':form, 'vaga_id':vaga_id})
 
-@is_authenticated
+@login_required(login_url='login')
 def deletar_vaga(request, vaga_id):
      vagas = Vaga.objects.get(id=vaga_id)
      vagas.delete()

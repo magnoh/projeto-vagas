@@ -50,7 +50,7 @@ def cadastro(request):
             email=form["email_usuario"].value()
             senha=form["senha_usuario_1"].value()
 
-            if User.objects.filter(username=nome).exists():
+            if User.objects.filter(username=nome).first():
                 messages.error(request, "Usuário ja existente")
                 return redirect('cadastro')
             

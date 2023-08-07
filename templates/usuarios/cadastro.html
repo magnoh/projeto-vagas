@@ -6,6 +6,11 @@
 
 <div class="main-login">
     <div class="left-login">
+        {% for message in messages %}
+        <div class="alert alert-primary">
+            <p id="messages">{{ message }}</p>
+        </div>
+        {% endfor %}
 
         <h1>Faça Login <br> E entre para o nosso time</h1>
         <img src="{% static '/assets/svg/resume-animate.svg' %}" class="left-login-image" alt="resume">
