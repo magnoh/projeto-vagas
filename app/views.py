@@ -5,17 +5,6 @@ from app.forms import *
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-# def is_authenticated(func):
-
-#     def verify(request):
-#         if not request.user.is_authenticated:
-#             messages.error(request,"Usuario não logado")
-#             return redirect('login')
-#         return func(request)
-     
-#     return verify
-
-
 def index(request):
     acesso = Vaga.objects.order_by('data_publicada')
     return render(request, 'app/index.html', {'cards': acesso})
